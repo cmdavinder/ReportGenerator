@@ -22,6 +22,8 @@ import com.omniture.api.utils.ExcelUtils;
 /**
  * The Class HourlyReportingStrategy is an implementation of
  * {@link ReportingStrategy} for generating hourly reports.
+ * 
+ * @author Davinder
  */
 public class HourlyReportingStrategy extends AbstractReportingStrategy {
 

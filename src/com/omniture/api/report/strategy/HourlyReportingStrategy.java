@@ -81,7 +81,9 @@ public class HourlyReportingStrategy extends AbstractReportingStrategy {
 	}
 
 	/**
-	 * Gets the reporting dates.
+	 * Gets the reporting dates as speciafied in
+	 * {@link HourlyReportingStrategy#REPORTING_PAST_DAYS}. "-n" will get Date
+	 * object of date n days ago.
 	 *
 	 * @return the reporting dates
 	 */
@@ -99,7 +101,7 @@ public class HourlyReportingStrategy extends AbstractReportingStrategy {
 	}
 
 	/**
-	 * Gets the comparator.
+	 * Gets the comparator for sorting data based on dates in descending order.
 	 *
 	 * @param rows
 	 *            the rows

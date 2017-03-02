@@ -13,7 +13,8 @@ import java.util.List;
 public class DateUtils {
 
 	/**
-	 * Gets the date.
+	 * Gets the date object from day, month and year. The generated Date object
+	 * will by default have 00:00:00 time set.
 	 *
 	 * @param day
 	 *            the day
@@ -35,7 +36,8 @@ public class DateUtils {
 	}
 
 	/**
-	 * Gets the date.
+	 * Gets the date object from hourm day, month and year. The generated Date
+	 * object will by default have {hour}:00:00 time set.
 	 *
 	 * @param hour
 	 *            the hour
@@ -60,12 +62,14 @@ public class DateUtils {
 	}
 
 	/**
-	 * Gets the date.
+	 * Gets the date object with respect to date passed to the method. The new
+	 * date object is then created as per valeu of {days} integer passed to the
+	 * method.
 	 *
 	 * @param date
 	 *            the date
 	 * @param days
-	 *            the days
+	 *            the days are specified
 	 * @return the date
 	 */
 	public static Date getDate(Date date, int days) {

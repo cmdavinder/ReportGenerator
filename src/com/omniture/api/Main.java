@@ -13,7 +13,7 @@ import com.omniture.api.utils.JSONUtils;
 
 public class Main {
 
-	private static final String EXCEL_PATH = "C:\\Users\\Davinder\\Desktop\\sample_data\\HealthCheck - Viber Key Business KPIs17-February-17.xlsx";
+	private static final String EXCEL_PATH = "C:\\Users\\Davinder\\Desktop\\sample_data\\report.xlsx";
 	private static final String SAMPLE_JSON_FILE = "C:\\Users\\Davinder\\Desktop\\sample_data\\Viber_Response_Hour_Report.json";
 
 	/**

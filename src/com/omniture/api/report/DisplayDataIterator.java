@@ -55,14 +55,10 @@ public class DisplayDataIterator {
 	 */
 	private int findNextIdx() {
 		List<DataRow> rows = displayData.getRows();
-		boolean found = false;
 		int tempIdx = idx;
-		while (!found) {
-			tempIdx++;
-			if (tempIdx >= rows.size()) {
-				tempIdx = -1;
-				break;
-			}
+		tempIdx++;
+		if (tempIdx >= rows.size()) {
+			tempIdx = -1;
 		}
 		return tempIdx;
 	}

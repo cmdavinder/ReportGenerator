@@ -30,9 +30,9 @@ public class HourlyReportingStrategy extends AbstractReportingStrategy {
 	private static final int[] REPORTING_PAST_DAYS = { -1, -7, -28 };
 	private static final int FIRST_ROW_INDEX = 21;
 	private static final int FIRST_COLUMN_INDEX = 3;
-	private static final int COLUMN_INCREMENT_FACTOR = 3;
+	private static final int COLUMN_INCREMENT_FACTOR = 4;
 	private static final int ROWS_TO_PROCESS = 24;
-	private static final int COLUMNS_TO_PROCESS = REPORTING_PAST_DAYS.length;
+	private static final int COLUMNS_TO_PROCESS = REPORTING_PAST_DAYS.length + 1;
 
 	/**
 	 * Instantiates a new hourly reporting strategy.
@@ -49,6 +49,7 @@ public class HourlyReportingStrategy extends AbstractReportingStrategy {
 	 * 
 	 * @see com.omniture.api.report.strategy.ReportingStrategy#writeReport()
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	public void writeReport() throws Exception {
 		XSSFWorkbook workbook = getXLXSWorkBook();
@@ -62,15 +63,17 @@ public class HourlyReportingStrategy extends AbstractReportingStrategy {
 			XSSFSheet sheet = workbook.getSheetAt(sheetIdx);
 			String sheetName = sheet.getSheetName();
 			if (getParams().getReportMetrics().contains(sheetName)) {
-				for (int i = 0, j = 0; i < COLUMNS_TO_PROCESS; i++, j = j + COLUMN_INCREMENT_FACTOR) {
+				for (int i = 0, j = 0; i < COLUMNS_TO_PROCESS; i++) {
 					for (int k = 0; k < ROWS_TO_PROCESS; k++) {
 						Row row = sheet.getRow(FIRST_ROW_INDEX + k);
-						Cell cell = row.getCell(FIRST_COLUMN_INDEX + i);
+						Cell cell = row.getCell(FIRST_COLUMN_INDEX + j);
 						if (iterator.hasNext()) {
 							Double counts = iterator.next().getCounts();
+							cell.setCellType(Cell.CELL_TYPE_NUMERIC);
 							cell.setCellValue(counts);
 						}
 					}
+					j = (i == 0) ? j + COLUMN_INCREMENT_FACTOR - 1 : j + COLUMN_INCREMENT_FACTOR;
 				}
 			}
 		}

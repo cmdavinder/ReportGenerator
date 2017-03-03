@@ -2,7 +2,7 @@ package com.omniture.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.omniture.api.model.deserializer.CountsListDoubleDeserializer;
+import com.omniture.api.model.deserializer.CountsDoubleDeserializer;
 
 /**
  * The Class DataRow represents single data element in {@link Report} "data"
@@ -18,7 +18,7 @@ public class DataRow {
 	private int day;
 	private int hour;
 
-	@JsonDeserialize(using = CountsListDoubleDeserializer.class)
+	@JsonDeserialize(using = CountsDoubleDeserializer.class)
 	private Double counts;
 
 	/**

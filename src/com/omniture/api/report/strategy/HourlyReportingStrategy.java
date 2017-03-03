@@ -1,8 +1,11 @@
 package com.omniture.api.report.strategy;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -11,8 +14,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.omniture.api.model.DataRow;
-import com.omniture.api.report.DisplayData;
-import com.omniture.api.report.DisplayDataIterator;
 import com.omniture.api.report.HourlyReportDisplayCriteria;
 import com.omniture.api.report.ReportDisplayCriteria;
 import com.omniture.api.report.param.ReportParams;
@@ -56,8 +57,8 @@ public class HourlyReportingStrategy extends AbstractReportingStrategy {
 		List<DataRow> allRows = getParams().getReport().getData();
 		ReportDisplayCriteria criteria = new HourlyReportDisplayCriteria();
 		List<DataRow> displayRows = criteria.meetCriteria(allRows, getReportingDates());
-		DisplayData displayData = new DisplayData(displayRows);
-		DisplayDataIterator iterator = displayData.sortedIterator(getComparator(displayRows));
+		Collections.sort(displayRows, getComparator());
+		Iterator<DataRow> iterator = displayRows.iterator();
 
 		for (int sheetIdx = 0; sheetIdx < workbook.getNumberOfSheets(); sheetIdx++) {
 			XSSFSheet sheet = workbook.getSheetAt(sheetIdx);
@@ -107,7 +108,7 @@ public class HourlyReportingStrategy extends AbstractReportingStrategy {
 	 *            the rows
 	 * @return the comparator
 	 */
-	private Comparator<DataRow> getComparator(List<DataRow> rows) {
+	private Comparator<DataRow> getComparator() {
 		return new Comparator<DataRow>() {
 			@Override
 			public int compare(DataRow o1, DataRow o2) {

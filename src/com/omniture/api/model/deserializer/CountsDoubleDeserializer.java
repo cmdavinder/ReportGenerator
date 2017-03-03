@@ -16,7 +16,7 @@ import com.omniture.api.model.DataRow;
  * 
  * @author Davinder
  */
-public class CountsListDoubleDeserializer extends JsonDeserializer<Double> {
+public class CountsDoubleDeserializer extends JsonDeserializer<Double> {
 
 	private static final Double DEFAULT_VALUE = 00.00D;
 

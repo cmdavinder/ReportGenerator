@@ -1,7 +1,6 @@
 package com.omniture.api.report.strategy;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -28,12 +27,12 @@ import com.omniture.api.utils.ExcelUtils;
  */
 public class HourlyReportingStrategy extends AbstractReportingStrategy {
 
-	private static final int[] REPORTING_PAST_DAYS = { -1, -7, -28 };
+	private static final int[] REPORTING_DAYS = { 0, -1, -7, -28 };
 	private static final int FIRST_ROW_INDEX = 21;
 	private static final int FIRST_COLUMN_INDEX = 3;
 	private static final int COLUMN_INCREMENT_FACTOR = 4;
 	private static final int ROWS_TO_PROCESS = 24;
-	private static final int COLUMNS_TO_PROCESS = REPORTING_PAST_DAYS.length + 1;
+	private static final int COLUMNS_TO_PROCESS = REPORTING_DAYS.length;
 
 	/**
 	 * Instantiates a new hourly reporting strategy.
@@ -92,10 +91,10 @@ public class HourlyReportingStrategy extends AbstractReportingStrategy {
 		List<Date> reportingDates = new ArrayList<Date>();
 		List<DataRow> allRows = getParams().getReport().getData();
 		DataRow lastRow = allRows.get(allRows.size() - 1);
-		Date currentDate = DateUtils.getDate(lastRow.getDay(), lastRow.getMonth(), lastRow.getYear());
-		reportingDates.add(currentDate);
-		for (int i = 0; i < REPORTING_PAST_DAYS.length; i++) {
-			Date newDate = DateUtils.getDate(currentDate, REPORTING_PAST_DAYS[i]);
+		Date latestDate = DateUtils.getDate(lastRow.getDay(), lastRow.getMonth(), lastRow.getYear());
+		reportingDates.add(latestDate);
+		for (int i = 1; i < REPORTING_DAYS.length; i++) {
+			Date newDate = DateUtils.getDate(latestDate, REPORTING_DAYS[i]);
 			reportingDates.add(newDate);
 		}
 		return reportingDates;

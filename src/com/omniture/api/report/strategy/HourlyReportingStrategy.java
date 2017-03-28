@@ -113,7 +113,7 @@ public class HourlyReportingStrategy extends AbstractReportingStrategy {
 			public int compare(DataRow o1, DataRow o2) {
 				Date dateo1 = DateUtils.getDate(o1.getHour(), o1.getDay(), o1.getMonth(), o1.getYear());
 				Date dateo2 = DateUtils.getDate(o2.getHour(), o2.getDay(), o2.getMonth(), o2.getYear());
-				return dateo1.compareTo(dateo2);
+				return dateo2.compareTo(dateo1);
 			}
 		};
 
